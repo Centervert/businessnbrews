@@ -1,6 +1,6 @@
 # Business & Brews — Master Living Doc
 
-Purpose: single source of truth for what exists, what’s done, and what’s next.
+Purpose: single source of truth for what exists, what's done, and what's next.
 This doc should let anyone pick up the project immediately.
 
 ---
@@ -9,6 +9,8 @@ This doc should let anyone pick up the project immediately.
 - **Client:** Business & Brews (All Things Greenville LLC)
 - **Goal:** modern rebuild of the Business & Brews site with a premium dark hero, lighter content sections, and clean sponsor/venue presence. Integrations come later.
 - **Scope today:** front-end only; no Eventbrite/Resend/etc. wired.
+- **Repository:** https://github.com/Centervert/businessnbrews
+- **Status:** Ready for deployment
 
 ---
 
@@ -104,28 +106,42 @@ This doc should let anyone pick up the project immediately.
 
 ## How to Run Locally
 ```bash
-cd /Users/tyleramos/Desktop/BusinessAndBrews/web
+git clone https://github.com/Centervert/businessnbrews.git
+cd businessnbrews/web
 npm install
 npm run dev
 ```
 Open `http://localhost:3000`
 
+## Deployment
+The site is ready to deploy on Vercel, Netlify, or similar platforms:
+1. Connect the GitHub repo to your hosting platform
+2. Set the root directory to `web`
+3. Framework preset: Next.js
+4. Add environment variables as needed (see `web/env.example`)
+
 ---
 
 ## Next Tasks (shortlist)
-**Front-end polish**
-- Tune hero overlay/contrast if needed for vizid balance.
-- Adjust sponsor/venue logo sizing as new logos are added.
-- Confirm the feathered photo strip placement & density.
+**Deployment**
+- [ ] Deploy to Vercel/Netlify
+- [ ] Configure custom domain
+- [ ] Set up SSL certificate
 
-**Integrations (later)**
-- Eventbrite sync + embedded checkout.
-- Newsletter platform hookup (Resend/Mailchimp).
-- Google Maps for venues.
+**Front-end polish**
+- [ ] Tune hero overlay/contrast if needed for vizid balance
+- [ ] Adjust sponsor/venue logo sizing as new logos are added
+- [ ] Confirm the feathered photo strip placement & density
+- [ ] Mobile navigation menu (hamburger)
+
+**Integrations**
+- [ ] Eventbrite sync + embedded checkout
+- [ ] Newsletter platform hookup (Resend/Mailchimp)
+- [ ] Google Maps for venues
 
 **Content**
-- Replace RSVP placeholder content with real upcoming event data.
-- Expand venue logos list (as provided).
+- [ ] Replace RSVP placeholder content with real upcoming event data
+- [ ] Expand venue logos list (as provided)
 
 ---
 

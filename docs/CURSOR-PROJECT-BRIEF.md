@@ -1,9 +1,11 @@
 # Business & Brews Website Rebuild
 ## Cursor Project Brief
 
-**Project Owner:** Tyler Amos / Centervert  
-**Client:** Business & Brews (All Things Greenville LLC)  
+**Project Owner:** Tyler Amos / Centervert
+**Client:** Business & Brews (All Things Greenville LLC)
 **Date:** January 16, 2026
+**Repository:** https://github.com/Centervert/businessnbrews
+**Status:** Frontend complete, ready for deployment
 
 ---
 
@@ -29,16 +31,19 @@ Rebuild the Business & Brews website from a static WordPress site to a modern, d
 
 ---
 
-## Tech Stack Decision Needed
+## Tech Stack (Decided)
 
-The PRD suggests WordPress with these plugins:
-- Elementor Pro or Bricks Builder
-- Advanced Custom Fields (ACF) Pro
-- Yoast SEO or RankMath
-- WP Rocket
-- Gravity Forms
+**Chosen:** Next.js (App Router) + Tailwind CSS
 
-**Alternative consideration:** Modern JAMstack (Next.js + Headless CMS) could provide better performance and developer experience. Discuss with client.
+| Component | Technology |
+|-----------|------------|
+| Framework | Next.js 16.1.2 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Email | Resend (stubbed) |
+| React | 19.2.3 |
+
+The JAMstack approach was selected for better performance, developer experience, and modern deployment options (Vercel/Netlify).
 
 ---
 
@@ -237,7 +242,8 @@ From the website's Past Speakers section:
 
 ## Open Questions for Client
 
-1. **Tech Stack:** WordPress as specified, or consider modern alternatives (Next.js, Astro)?
+1. ~~**Tech Stack:** WordPress as specified, or consider modern alternatives (Next.js, Astro)?~~
+   **RESOLVED:** Next.js + Tailwind CSS
 
 2. **Missing Venues:** What venues were used for:
    - May 16, 2023
@@ -246,11 +252,12 @@ From the website's Past Speakers section:
 
 3. **Charleston:** Include Charleston chapter in this build or separate project?
 
-4. **Hosting:** Where will this be deployed?
+4. ~~**Hosting:** Where will this be deployed?~~
+   **RESOLVED:** Vercel or Netlify (pending final decision)
 
 5. **Gallery Feature:** Photo gallery with search/filter by event date and venue?
 
-6. **Newsletter:** Which platform? Mailchimp, Constant Contact, or other?
+6. **Newsletter:** Which platform? Mailchimp, Constant Contact, or other? (Resend stubbed in code)
 
 ---
 
@@ -265,13 +272,14 @@ After client approval, delete:
 
 ## Next Steps
 
-1. [ ] Get client answers to open questions
-2. [ ] Finalize tech stack decision
-3. [ ] Create wireframes/mockups based on PRD specs
-4. [ ] Set up development environment
-5. [ ] Build component library with brand colors/fonts
-6. [ ] Implement data models
+1. [x] ~~Get client answers to open questions~~
+2. [x] ~~Finalize tech stack decision~~ → Next.js + Tailwind
+3. [x] ~~Create wireframes/mockups based on PRD specs~~
+4. [x] ~~Set up development environment~~
+5. [x] ~~Build component library with brand colors/fonts~~
+6. [ ] Implement data models (CMS integration)
 7. [ ] Build Eventbrite integration
 8. [ ] Migrate speaker/venue data
-9. [ ] Import photo galleries
-10. [ ] QA and launch
+9. [ ] Import photo galleries (full gallery page)
+10. [ ] Deploy to production
+11. [ ] QA and launch
