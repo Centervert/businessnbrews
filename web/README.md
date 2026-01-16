@@ -3,6 +3,8 @@
 Modern rebuild of the Business & Brews website using Next.js and Tailwind CSS.
 
 **Repository:** https://github.com/Centervert/businessnbrews
+**Hosting:** Vercel (Centervert account)
+**DNS:** Nameservers managed by Vercel
 
 ## Tech Stack
 
@@ -61,12 +63,12 @@ web/
 
 ## Deployment
 
-Deploy to Vercel or Netlify:
-
-1. Connect this GitHub repository
-2. Set root directory to `web`
-3. Framework preset: Next.js
-4. Add environment variables as needed
+**Live on Vercel** (Centervert account)
+- Repository connected: https://github.com/Centervert/businessnbrews
+- Root directory: `web`
+- Framework: Next.js (auto-detected)
+- DNS: Nameservers managed by Vercel
+- SSL: Automatic via Vercel
 
 ## What's Built
 

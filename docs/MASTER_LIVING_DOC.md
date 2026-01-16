@@ -10,7 +10,9 @@ This doc should let anyone pick up the project immediately.
 - **Goal:** modern rebuild of the Business & Brews site with a premium dark hero, lighter content sections, and clean sponsor/venue presence. Integrations come later.
 - **Scope today:** front-end only; no Eventbrite/Resend/etc. wired.
 - **Repository:** https://github.com/Centervert/businessnbrews
-- **Status:** Ready for deployment
+- **Hosting:** Vercel (Centervert account)
+- **DNS:** Nameservers managed by Vercel
+- **Status:** Deployed
 
 ---
 
@@ -114,19 +116,21 @@ npm run dev
 Open `http://localhost:3000`
 
 ## Deployment
-The site is ready to deploy on Vercel, Netlify, or similar platforms:
-1. Connect the GitHub repo to your hosting platform
-2. Set the root directory to `web`
-3. Framework preset: Next.js
-4. Add environment variables as needed (see `web/env.example`)
+**Live on Vercel** (Centervert account)
+- **Repository:** https://github.com/Centervert/businessnbrews
+- **Root directory:** `web`
+- **Framework:** Next.js (auto-detected)
+- **DNS:** Nameservers managed by Vercel
+- **Environment variables:** See `web/env.example`
 
 ---
 
 ## Next Tasks (shortlist)
 **Deployment**
-- [ ] Deploy to Vercel/Netlify
-- [ ] Configure custom domain
-- [ ] Set up SSL certificate
+- [x] Deploy to Vercel
+- [x] Configure custom domain
+- [x] Set up SSL certificate (automatic via Vercel)
+- [x] Configure nameservers with Vercel
 
 **Front-end polish**
 - [ ] Tune hero overlay/contrast if needed for vizid balance

@@ -5,7 +5,9 @@
 **Client:** Business & Brews (All Things Greenville LLC)
 **Date:** January 16, 2026
 **Repository:** https://github.com/Centervert/businessnbrews
-**Status:** Frontend complete, ready for deployment
+**Hosting:** Vercel (Centervert account)
+**DNS:** Nameservers managed by Vercel
+**Status:** Deployed
 
 ---
 
@@ -253,7 +255,7 @@ From the website's Past Speakers section:
 3. **Charleston:** Include Charleston chapter in this build or separate project?
 
 4. ~~**Hosting:** Where will this be deployed?~~
-   **RESOLVED:** Vercel or Netlify (pending final decision)
+   **RESOLVED:** Vercel (Centervert account), nameservers managed by Vercel
 
 5. **Gallery Feature:** Photo gallery with search/filter by event date and venue?
 
@@ -281,5 +283,5 @@ After client approval, delete:
 7. [ ] Build Eventbrite integration
 8. [ ] Migrate speaker/venue data
 9. [ ] Import photo galleries (full gallery page)
-10. [ ] Deploy to production
+10. [x] ~~Deploy to production~~ → Vercel (Centervert account)
 11. [ ] QA and launch
