@@ -1,155 +1,215 @@
 # Business & Brews — Master Living Doc
 
-Purpose: single source of truth for what exists, what's done, and what's next.
-This doc should let anyone pick up the project immediately.
+> **THIS IS THE PRIMARY DOCUMENT** — Read this first. Keep it updated.
+>
+> Single source of truth for what exists, what's done, and what's next.
 
 ---
 
 ## Project Snapshot
-- **Client:** Business & Brews (All Things Greenville LLC)
-- **Goal:** modern rebuild of the Business & Brews site with a premium dark hero, lighter content sections, and clean sponsor/venue presence. Integrations come later.
-- **Scope today:** front-end only; no Eventbrite/Resend/etc. wired.
-- **Repository:** https://github.com/Centervert/businessnbrews
-- **Hosting:** Vercel (Centervert account)
-- **DNS:** Nameservers managed by Vercel
-- **Status:** Deployed
+
+| Field | Value |
+|-------|-------|
+| **Client** | Business & Brews (All Things Greenville LLC) |
+| **Repository** | https://github.com/Centervert/businessnbrews |
+| **Live Site** | Deployed on Vercel (Centervert account) |
+| **DNS** | Nameservers managed by Vercel |
+| **Status** | **DEPLOYED** — Production |
+
+**Goal:** Modern rebuild of the Business & Brews site with premium dark hero, lighter content sections, and clean sponsor/venue presence.
+
+**Current Scope:** Front-end only. No Eventbrite/Resend integrations wired yet.
 
 ---
 
-## Tech Stack (current)
-- **Framework:** Next.js (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind (via `@import "tailwindcss"`)
-- **Assets:** Local images in `web/public/`
-- **Dev:** `npm run dev` in `web/`
-- **Dev UI disabled:** `devIndicators: false` in `web/next.config.ts`
+## Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Framework | Next.js 16.x (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| React | 19.x |
+| Hosting | Vercel |
 
 ---
 
-## Project Structure (important)
-- **App root:** `web/`
-- **Home page:** `web/src/app/page.tsx`
-- **Global styles:** `web/src/app/globals.css`
-- **Hero animation:** `web/src/components/HeroScroll.tsx`
-- **API stub:** `web/src/app/api/contact/route.ts` (Resend placeholder, not used)
-- **Public assets:** `web/public/`
+## Project Structure
+
+```
+BusinessAndBrews/
+├── web/                          # <- MAIN APP DIRECTORY
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.tsx          # Home page
+│   │   │   ├── layout.tsx        # Root layout
+│   │   │   └── globals.css       # Global styles + fonts
+│   │   └── components/
+│   │       └── HeroScroll.tsx    # Hero animation component
+│   ├── public/                   # Static assets
+│   │   ├── bnb.logo.2.white.png  # Header logo
+│   │   ├── bnb.badge.white.png   # Footer logo
+│   │   ├── fonts/                # Boska + Satoshi fonts
+│   │   ├── hero-video/           # 240 hero frames
+│   │   ├── gallery/              # Event photos
+│   │   ├── sponsors/             # Sponsor logos
+│   │   └── venues/               # Venue logos
+│   ├── package.json
+│   └── next.config.ts
+├── assets/                       # Source assets (not deployed)
+│   ├── brand/                    # Logo source files
+│   │   └── Updated_Jan202026/    # Latest logo versions
+│   ├── hero-video/               # Original hero frames
+│   └── photos/                   # All event photos
+└── docs/                         # Documentation
+    ├── README.md                 # Doc guide (start here)
+    ├── MASTER_LIVING_DOC.md      # This file
+    ├── businessandbrews.vizid.pdf # Brand identity
+    └── archive/                  # Historical docs
+```
 
 ---
 
-## Brand Assets & Fonts
-- **Logo usage**
-  - Header: `web/public/bnb.logo.2.white.png`
-  - Footer: `web/public/bnb.badge.white.png`
-  - Footer credit: `web/public/centervert-builtby.png`
-- **Colors** (from `docs/businessandbrews.vizid.pdf`):
-  - Carolina `#003D71`
-  - Midland `#F2B554`
-  - Coastal `#78F0E8`
-  - Bayside `#F2F1EE`
-  - Black `#0F0F0F`
-  - White `#FFFFFF`
-- **Fonts**
-  - Boska Black + Satoshi Regular via `@font-face` in `web/src/app/globals.css`
-  - Files in `web/public/fonts/` (copied from `assets/Fonts/.../OTF`)
+## Brand Assets
+
+### Logos (Current)
+| Usage | File | Location |
+|-------|------|----------|
+| Header | `bnb.logo.2.white.png` | `web/public/` |
+| Footer | `bnb.badge.white.png` | `web/public/` |
+| Footer credit | `centervert-builtby.png` | `web/public/` |
+| Favicon | `bnb-favicon.png` | `web/public/` |
+
+### Colors
+| Name | Hex | Usage |
+|------|-----|-------|
+| Carolina | `#003D71` | Primary blue |
+| Midland | `#F2B554` | Accent/CTA (amber) |
+| Coastal | `#78F0E8` | Secondary accent |
+| Bayside | `#F2F1EE` | Light background |
+| Black | `#0F0F0F` | Dark background |
+| White | `#FFFFFF` | Text on dark |
+
+### Fonts
+- **Headings:** Boska Black
+- **Body:** Satoshi Regular
+- **Location:** `web/public/fonts/`
+- **Defined in:** `web/src/app/globals.css`
 
 ---
 
-## What’s Built (current UI)
-**Header**
-- Fixed, semi‑transparent dark bar with horizontal white logo and CTA.
+## What's Built (Current UI)
 
-**Hero**
-- Full‑bleed, scroll‑driven animation cycling 240 hero frames.
-- Centered headline: “SOUTH CAROLINA’S BEST NETWORKING GROUP.”
-- Subtle scroll‑fade/scale on the hero copy.
+### Header
+- Fixed, semi-transparent dark bar
+- Horizontal white logo (left)
+- Nav: Events | Speakers | Venues | Gallery | Sponsors
+- "Get Tickets" CTA button (right)
 
-**About + Sponsors + Venues**
-- About block (light background).
-- Sponsor logos strip (light card).
-- Past venues strip (dark card) under sponsors.
+### Hero
+- Full-bleed scroll-driven animation (240 frames)
+- Headline: "SOUTH CAROLINA'S BEST NETWORKING GROUP"
+- Scroll-fade/scale effect
 
-**Next Event**
-- RSVP card with When/Where/Who/Sponsored by + RSVP/Calendar buttons.
-- Recent events list with “See past events” CTA.
+### About Section
+- Light background (Bayside)
+- About text block
+- Sponsor logos strip (light card)
+- Past venues strip (dark card)
 
-**Photo Strip**
-- Feathered photo strip **below RSVP** (kept per latest request).
+### Next Event Section
+- RSVP card: When/Where/Who/Sponsored by
+- "RSVP on Eventbrite" + "Add to Calendar" buttons
+- Recent events sidebar
 
-**Footer**
-- Dark footer, smaller height.
-- Newsletter input + CTA (inline).
-- Centered “Built by Centervert” image credit at bottom.
+### Photo Strip
+- Feathered photo strip below RSVP section
 
----
-
-## Assets & Data Changes
-- **Hero frames** copied to `web/public/hero-video/`
-- **Gallery highlights** images copied to `web/public/gallery/`
-- **Sponsors** copied to `web/public/sponsors/`
-- **Venues** copied to `web/public/venues/`
-- **City Club** uses `web/public/venues/city-club.svg`
-- **Logo cleanup:** Sponsor + Venue logo files were processed for transparency and trimmed. `Hartness.jpg` converted to `Hartness.png`.
-
----
-
-## What Was Removed / Disabled
-- Full gallery page/section (replaced by small feathered strip only).
-- Large “Explore Business & Brews” card grid (removed).
-- Next.js dev indicator bubble (disabled).
-- Default Next.js favicon replaced with Business & Brews icon.
-
----
-
-## Known Issues / Notes
-- Local dev sharing (tunnels) can be slow; localtunnel was stopped.
-- If a logo looks off, the underlying image may need manual cleanup beyond the auto transparency pass.
+### Footer
+- Dark background
+- Badge logo + description
+- Newsletter signup (email input + button)
+- "Built by Centervert" credit
 
 ---
 
 ## How to Run Locally
+
 ```bash
 git clone https://github.com/Centervert/businessnbrews.git
 cd businessnbrews/web
 npm install
 npm run dev
 ```
-Open `http://localhost:3000`
 
-## Deployment
-**Live on Vercel** (Centervert account)
-- **Repository:** https://github.com/Centervert/businessnbrews
-- **Root directory:** `web`
-- **Framework:** Next.js (auto-detected)
-- **DNS:** Nameservers managed by Vercel
-- **Environment variables:** See `web/env.example`
+Open http://localhost:3000
 
 ---
 
-## Next Tasks (shortlist)
-**Deployment**
+## Deployment
+
+**Auto-deploys from `main` branch via Vercel**
+
+| Setting | Value |
+|---------|-------|
+| Repository | https://github.com/Centervert/businessnbrews |
+| Root directory | `web` |
+| Framework | Next.js (auto-detected) |
+| Build command | `next build` |
+| Environment | See `web/env.example` |
+
+---
+
+## Task Status
+
+### Completed
 - [x] Deploy to Vercel
 - [x] Configure custom domain
-- [x] Set up SSL certificate (automatic via Vercel)
-- [x] Configure nameservers with Vercel
+- [x] SSL certificate (automatic)
+- [x] Configure nameservers
+- [x] Update logos (Jan 20, 2026)
 
-**Front-end polish**
-- [ ] Tune hero overlay/contrast if needed for vizid balance
-- [ ] Adjust sponsor/venue logo sizing as new logos are added
-- [ ] Confirm the feathered photo strip placement & density
+### In Progress / Pending
+
+**Front-end Polish**
 - [ ] Mobile navigation menu (hamburger)
+- [ ] Tune hero overlay/contrast
+- [ ] Adjust sponsor/venue logo sizing
 
 **Integrations**
 - [ ] Eventbrite sync + embedded checkout
-- [ ] Newsletter platform hookup (Resend/Mailchimp)
+- [ ] Newsletter platform (Resend/Mailchimp)
 - [ ] Google Maps for venues
 
 **Content**
-- [ ] Replace RSVP placeholder content with real upcoming event data
-- [ ] Expand venue logos list (as provided)
+- [ ] Replace placeholder event data with real data
+- [ ] Expand venue logos list
 
 ---
 
-## References
-- PRD: `docs/Website Recreation Detailed Overview Request.md`
-- Visual Identity: `docs/businessandbrews.vizid.pdf`
-- Asset inventory: `docs/CURSOR-PROJECT-BRIEF.md`
+## Changelog
+
+| Date | Change |
+|------|--------|
+| Jan 20, 2026 | Updated header logo to `bnb.logo.2.white.png`, footer logo to `bnb.badge.white.png` |
+| Jan 17, 2026 | Deployed to Vercel, configured DNS |
+| Jan 16, 2026 | Initial build complete |
+
+---
+
+## Other Documentation
+
+| Document | Purpose |
+|----------|---------|
+| `businessandbrews.vizid.pdf` | Visual identity guide (colors, fonts, logo specs) |
+| `archive/PRD-Original.md` | Original requirements doc (historical — proposed WordPress, we built Next.js) |
+
+---
+
+## Notes for AI Assistants
+
+1. **Read this document first** — it reflects the actual current state
+2. **Do NOT use** `archive/PRD-Original.md` as a guide — it was the original proposal and doesn't match what was built
+3. **Code location:** `web/src/app/page.tsx` is the main page
+4. **Assets location:** `web/public/` for deployed assets
+5. **To deploy:** commit to `main` and push — Vercel auto-deploys
