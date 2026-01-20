@@ -38,8 +38,8 @@ This doc should let anyone pick up the project immediately.
 
 ## Brand Assets & Fonts
 - **Logo usage**
-  - Header: `web/public/bnb-logo-horz-white.png`
-  - Footer: `web/public/bnb-logo-square-white.png`
+  - Header: `web/public/bnb.logo.2.white.png`
+  - Footer: `web/public/bnb.badge.white.png`
   - Footer credit: `web/public/centervert-builtby.png`
 - **Colors** (from `docs/businessandbrews.vizid.pdf`):
   - Carolina `#003D71`

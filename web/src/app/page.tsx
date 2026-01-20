@@ -8,7 +8,7 @@ export default function Home() {
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:h-20">
           <div className="flex items-center gap-3">
             <Image
-              src="/bnb-logo-horz-white.png"
+              src="/bnb.logo.2.white.png"
               alt="Business & Brews logo"
               width={220}
               height={58}
@@ -256,7 +256,7 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col gap-3">
             <Image
-              src="/bnb-logo-square-white.png"
+              src="/bnb.badge.white.png"
               alt="Business & Brews logo"
               width={96}
               height={96}
