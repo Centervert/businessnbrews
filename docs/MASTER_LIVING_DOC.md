@@ -191,7 +191,7 @@ Open http://localhost:3000
 
 | Date | Change |
 |------|--------|
-| Jan 20, 2026 | Updated header logo to `bnb.logo.2.white.png`, footer logo to `bnb.badge.white.png` |
+| Jan 20, 2026 | Updated header logo to `bnb.logo.2.white.png`, footer logo to `bnb.badge.white.png`. Reorganized docs: created README.md, rewrote master doc, archived old PRD and cursor brief. |
 | Jan 17, 2026 | Deployed to Vercel, configured DNS |
 | Jan 16, 2026 | Initial build complete |
 
