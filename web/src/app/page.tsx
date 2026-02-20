@@ -57,14 +57,13 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-black/10 bg-white px-6 py-3 shadow-sm">
             {[
               {
-                src: "/sponsors/Flywood Productions.png",
-                alt: "Flywood Productions",
+                src: "/sponsors/Centervert.png",
+                alt: "Centervert",
               },
               {
                 src: "/sponsors/Piper Insurance Group .png",
                 alt: "Piper Insurance Group",
               },
-              { src: "/sponsors/Ridge Media.png", alt: "Ridge Media" },
               {
                 src: "/sponsors/Williams Wealth Management.png",
                 alt: "Williams Wealth Management",
