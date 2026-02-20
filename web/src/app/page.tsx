@@ -16,11 +16,7 @@ export default function Home() {
             />
           </div>
           <nav className="hidden gap-6 text-sm uppercase tracking-[0.2em] md:flex">
-            <a href="#events">Events</a>
-            <a href="#speakers">Speakers</a>
-            <a href="#venues">Venues</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#sponsors">Sponsors</a>
+            <a href="#next-event">Events</a>
           </nav>
           <button className="rounded-full bg-[color:var(--color-midland)] px-5 py-2 text-sm font-semibold text-black">
             Get Tickets
