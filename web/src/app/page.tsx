@@ -127,18 +127,19 @@ export default function Home() {
 
           <section
             id="next-event"
-            className="mx-auto grid w-full max-w-6xl gap-6 px-6 pt-12 md:grid-cols-[1.2fr_0.8fr]"
+            className="mx-auto w-full max-w-6xl px-6 pt-12"
           >
             <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
               <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--color-carolina)]">
                 Join the next event
               </p>
               <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.08em] md:text-4xl">
-                Business &amp; Brews: Greenville Social
+                Business &amp; Brews
               </h2>
               <p className="mt-4 text-base text-black/70">
-                An evening of connections, conversations, and community over
-                locally crafted brews.
+                Join us for Business &amp; Brews, where you can network with
+                fellow professionals over a cold one and discuss all things
+                business! Free to attend and open to the public.
               </p>
 
               <div className="mt-6 grid gap-4 text-sm text-black/80 md:grid-cols-2">
@@ -146,82 +147,31 @@ export default function Home() {
                   <p className="text-xs uppercase tracking-[0.25em] text-black/50">
                     When
                   </p>
-                  <p className="mt-2 text-base">Thursday, March 21 · 6:00 PM</p>
+                  <p className="mt-2 text-base">Tuesday, March 3 · 5:00 PM – 7:30 PM</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.25em] text-black/50">
                     Where
                   </p>
-                  <p className="mt-2 text-base">Hotel Hartness · Greenville, SC</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.25em] text-black/50">
-                    Who
-                  </p>
-                  <p className="mt-2 text-base">
-                    Featured speaker: Pamela Evette
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.25em] text-black/50">
-                    Sponsored by
-                  </p>
-                  <p className="mt-2 text-base">Piper Insurance Group</p>
+                  <p className="mt-2 text-base">City Club of Greenville · Greenville, SC</p>
                 </div>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                <button className="rounded-full bg-[color:var(--color-midland)] px-6 py-3 text-sm font-semibold text-black">
+                <a
+                  href="https://www.eventbrite.com/e/business-brews-tickets-1982852976630"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-[color:var(--color-midland)] px-6 py-3 text-sm font-semibold text-black"
+                >
                   RSVP on Eventbrite
-                </button>
+                </a>
                 <button className="rounded-full border border-black/20 px-6 py-3 text-sm font-semibold text-black">
                   Add to Calendar
                 </button>
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.3em] text-black/60">
-                Recent events
-              </p>
-              <div className="flex flex-col gap-3 text-sm text-black/70">
-              {[
-                {
-                  title: "Hotel Hartness",
-                  date: "Jan 21, 2025",
-                  speaker: "Jim Burns",
-                },
-                {
-                  title: "The Draper",
-                  date: "Feb 18, 2025",
-                  speaker: "Sam Konduras",
-                },
-                {
-                  title: "City Club Greenville",
-                  date: "Apr 29, 2025",
-                  speaker: "Pamela Evette",
-                },
-              ].map((event) => (
-                <div
-                  key={event.title}
-                  className="flex items-center justify-between rounded-2xl border border-black/10 bg-[color:var(--color-bayside)] px-4 py-3"
-                >
-                  <div>
-                    <p className="text-sm font-semibold text-black">
-                      {event.title}
-                    </p>
-                    <p className="text-xs text-black/60">{event.date}</p>
-                  </div>
-                  <span className="text-xs uppercase tracking-[0.2em] text-black/60">
-                    {event.speaker}
-                  </span>
-                </div>
-              ))}
-              </div>
-            <button className="mt-2 rounded-full border border-black/20 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black">
-              See past events
-            </button>
-            </div>
           </section>
 
           <section className="mx-auto w-full max-w-6xl px-6 pb-12">
