@@ -8,8 +8,13 @@ import { createPortal } from "react-dom";
 const EVENTBRITE_URL = "https://www.eventbrite.com/o/109127867981";
 
 export default function Header() {
+  const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [eventbriteModalOpen, setEventbriteModalOpen] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (menuOpen) {
@@ -146,8 +151,8 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Eventbrite redirect modal - rendered in portal so it centers correctly */}
-      {typeof document !== "undefined" &&
+      {/* Eventbrite redirect modal - portal only after mount to avoid hydration mismatch */}
+      {mounted &&
         createPortal(
           <div
             className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-opacity duration-200 ${eventbriteModalOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}

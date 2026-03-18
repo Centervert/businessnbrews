@@ -118,8 +118,17 @@ export default function Home() {
                 Join the next event
               </p>
               <p className="mt-2 text-xs uppercase tracking-[0.2em] text-black/50">
-                Powered by RealtyOneGroup Freedom
+                Powered by
               </p>
+              <div className="mt-2 flex items-center gap-2">
+                <Image
+                  src="/realty-one-group-freedom.png"
+                  alt="Realty ONE Group Freedom"
+                  width={220}
+                  height={56}
+                  className="h-10 w-auto object-contain object-left md:h-12"
+                />
+              </div>
               <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.08em] md:text-4xl">
                 Business &amp; Brews
               </h2>

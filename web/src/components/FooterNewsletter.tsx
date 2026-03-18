@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 function formatPhone(value: string): string {
@@ -12,12 +12,17 @@ function formatPhone(value: string): string {
 }
 
 export default function FooterNewsletter() {
+  const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   function handleEmailSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -109,8 +114,8 @@ export default function FooterNewsletter() {
         )}
       </div>
 
-      {/* Modal: rest of signup info */}
-      {typeof document !== "undefined" &&
+      {/* Modal - portal only after mount to avoid hydration mismatch */}
+      {mounted &&
         createPortal(
           <div
             className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-opacity duration-200 ${modalOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
