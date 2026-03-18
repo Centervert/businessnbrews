@@ -27,7 +27,7 @@ function formatWhen(startsAt: string, endsAt: string): string {
 
 function formatPastWhen(startsAt: string, endsAt: string, venueLocation: string): string {
   const when = formatWhen(startsAt, endsAt);
-  const [_, timePart] = when.split(" · ");
+  const [, timePart] = when.split(" · ");
   return `${timePart} · ${venueLocation}`;
 }
 
@@ -42,26 +42,56 @@ function formatPastTitle(startsAt: string, venueName: string): string {
   return `${day} · ${venueName}`;
 }
 
-export async function EventsSection() {
-  const supabase = createAdminClient();
-  const { data: events, error } = await supabase
-    .from("events")
-    .select("*")
-    .order("starts_at", { ascending: false });
+type EventRow = {
+  id: string;
+  ends_at: string;
+  starts_at: string;
+  venue_name: string;
+  venue_location: string;
+  title?: string;
+  description?: string | null;
+  speaker_name?: string | null;
+  speaker_title?: string | null;
+  eventbrite_url?: string | null;
+};
 
-  if (error) {
+export async function EventsSection() {
+  let events: EventRow[] | null = null;
+  let dbError: { message: string } | null = null;
+  try {
+    const supabase = createAdminClient();
+    const result = await supabase
+      .from("events")
+      .select("*")
+      .order("starts_at", { ascending: false });
+    events = result.data as EventRow[] | null;
+    dbError = result.error;
+  } catch (e) {
+    const msg = process.env.NODE_ENV === "development" && e instanceof Error ? e.message : null;
     return (
       <section id="next-event" className="mx-auto w-full max-w-6xl px-6 pt-12">
         <p className="text-black/70">Unable to load events. Please try again later.</p>
+        {msg && <p className="mt-2 text-xs text-black/50">{msg}</p>}
+      </section>
+    );
+  }
+
+  if (dbError) {
+    const msg = process.env.NODE_ENV === "development" ? dbError.message : null;
+    return (
+      <section id="next-event" className="mx-auto w-full max-w-6xl px-6 pt-12">
+        <p className="text-black/70">Unable to load events. Please try again later.</p>
+        {msg && <p className="mt-2 text-xs text-black/50">{msg}</p>}
       </section>
     );
   }
 
   const now = new Date();
-  const upcoming: typeof events = [];
-  const past: typeof events = [];
+  const eventList = events ?? [];
+  const upcoming: EventRow[] = [];
+  const past: EventRow[] = [];
 
-  for (const e of events ?? []) {
+  for (const e of eventList) {
     const endsAt = e.ends_at ? new Date(e.ends_at) : null;
     if (endsAt && endsAt >= now) {
       upcoming.push(e);

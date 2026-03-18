@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const EVENTBRITE_URL = "https://www.eventbrite.com/o/109127867981";
@@ -11,9 +11,10 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [eventbriteModalOpen, setEventbriteModalOpen] = useState(false);
+  const eventbriteButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => setMounted(true));
   }, []);
 
   useEffect(() => {
@@ -47,9 +48,15 @@ export default function Header() {
     setEventbriteModalOpen(true);
   }
 
+  function closeEventbriteModal() {
+    setEventbriteModalOpen(false);
+    requestAnimationFrame(() => eventbriteButtonRef.current?.focus());
+  }
+
   function goToEventbrite() {
     setEventbriteModalOpen(false);
     window.open(EVENTBRITE_URL, "_blank", "noopener,noreferrer");
+    requestAnimationFrame(() => eventbriteButtonRef.current?.focus());
   }
 
   return (
@@ -71,14 +78,15 @@ export default function Header() {
           <Link href="/" className="text-white/90 hover:text-white">
             Home
           </Link>
-          <a href="/#next-event" className="text-white/90 hover:text-white">
+          <Link href="/#next-event" className="text-white/90 hover:text-white">
             Events
-          </a>
+          </Link>
           <Link href="/signup" className="text-white/90 hover:text-white">
             Sign up
           </Link>
         </nav>
         <button
+          ref={eventbriteButtonRef}
           type="button"
           onClick={openEventbriteModal}
           className="hidden rounded-full bg-[color:var(--color-midland)] px-5 py-2 text-sm font-semibold text-black md:block"
@@ -128,13 +136,13 @@ export default function Header() {
         >
           Home
         </Link>
-        <a
+        <Link
           href="/#next-event"
           onClick={closeMenu}
           className="rounded-lg px-4 py-3 text-left text-sm uppercase tracking-[0.2em] text-white hover:bg-white/10"
         >
           Events
-        </a>
+        </Link>
         <Link
           href="/signup"
           onClick={closeMenu}
@@ -151,16 +159,14 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Eventbrite redirect modal - portal only after mount to avoid hydration mismatch */}
+      {/* Eventbrite redirect modal - only mount when open to avoid aria-hidden + focused descendant */}
       {mounted &&
+        eventbriteModalOpen &&
         createPortal(
-          <div
-            className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-opacity duration-200 ${eventbriteModalOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
-            aria-hidden={!eventbriteModalOpen}
-          >
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="presentation">
             <div
               className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-              onClick={() => setEventbriteModalOpen(false)}
+              onClick={closeEventbriteModal}
             />
             <div
               role="dialog"
@@ -177,7 +183,7 @@ export default function Header() {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
                 <button
                   type="button"
-                  onClick={() => setEventbriteModalOpen(false)}
+                  onClick={closeEventbriteModal}
                   className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white"
                 >
                   Stay

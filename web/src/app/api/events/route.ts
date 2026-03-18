@@ -36,9 +36,8 @@ export async function GET() {
       upcomingEvents: upcoming,
     });
   } catch (err) {
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Server error" },
-      { status: 500 }
-    );
+    const message = err instanceof Error ? err.message : "Server error";
+    const status = message.includes("Missing Supabase") ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

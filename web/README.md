@@ -94,6 +94,12 @@ web/
 
 If you get **"Invalid login credentials"** after creating a user: Supabase often requires new users to confirm their email before they can sign in. Either (1) in the Dashboard, open the user and use **Confirm email** (or recreate the user with **Auto Confirm User** checked), or (2) in Authentication → Providers → Email, turn off **Confirm email** so sign-in works without confirmation. Adding `http://localhost:3000` to Authentication → URL Configuration → **Redirect URLs** is also recommended for local dev.
 
+## Before going live
+
+- **Vercel:** Set env vars in Project → Settings → Environment Variables (Production): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON`, `SUPABASE_SERVICE_ROLE_KEY`, and `NEXT_PUBLIC_SITE_URL` = your production URL (e.g. `https://www.businessnbrews.com`) so sign-out redirects correctly.
+- **Supabase:** In Authentication → URL Configuration, add your production site to **Redirect URLs** (e.g. `https://www.businessnbrews.com/**`). Confirm coordinator users’ emails (or disable “Confirm email”) so they can sign in.
+- **Supabase:** Table grants are required for `public.events` (e.g. `GRANT SELECT TO anon;` etc.). If you see “permission denied for table events” after deploy, run the same grants in the SQL editor as used in development.
+
 ## Next Steps
 
 - [ ] Mobile navigation menu

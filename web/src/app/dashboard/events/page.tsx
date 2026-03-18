@@ -1,6 +1,5 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
@@ -46,9 +45,12 @@ export default function DashboardEventsPage() {
   const fetchEvents = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/events");
-      if (!res.ok) throw new Error("Failed to load events");
-      const data = await res.json();
-      setEvents(data);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(typeof data?.error === "string" ? data.error : "Failed to load events");
+        return;
+      }
+      setEvents(Array.isArray(data) ? data : []);
       setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to load events");

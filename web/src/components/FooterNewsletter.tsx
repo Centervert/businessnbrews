@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 function formatPhone(value: string): string {
@@ -19,6 +19,7 @@ export default function FooterNewsletter() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -81,7 +82,11 @@ export default function FooterNewsletter() {
   }
 
   function closeModal() {
-    if (!loading) setModalOpen(false);
+    if (!loading) {
+      setModalOpen(false);
+      // Return focus to email input when modal closes (avoids aria-hidden + focused descendant)
+      requestAnimationFrame(() => emailInputRef.current?.focus());
+    }
   }
 
   return (
@@ -95,6 +100,7 @@ export default function FooterNewsletter() {
         </p>
         <form onSubmit={handleEmailSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <input
+            ref={emailInputRef}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -114,12 +120,13 @@ export default function FooterNewsletter() {
         )}
       </div>
 
-      {/* Modal - portal only after mount to avoid hydration mismatch */}
+      {/* Modal - only mount when open to avoid aria-hidden on focused descendant */}
       {mounted &&
+        modalOpen &&
         createPortal(
           <div
-            className={`fixed inset-0 z-[100] flex items-center justify-center p-4 transition-opacity duration-200 ${modalOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
-            aria-hidden={!modalOpen}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            role="presentation"
           >
             <div
               className="absolute inset-0 bg-black/70 backdrop-blur-sm"

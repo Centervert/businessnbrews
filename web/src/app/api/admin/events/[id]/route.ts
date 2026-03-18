@@ -53,10 +53,9 @@ export async function PATCH(
     if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(data);
   } catch (err) {
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Server error" },
-      { status: 500 }
-    );
+    const message = err instanceof Error ? err.message : "Server error";
+    const status = message.includes("Missing Supabase") ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
 
@@ -72,9 +71,8 @@ export async function DELETE(
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Server error" },
-      { status: 500 }
-    );
+    const message = err instanceof Error ? err.message : "Server error";
+    const status = message.includes("Missing Supabase") ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

@@ -48,6 +48,7 @@ export default function DashboardLoginPage() {
               width={320}
               height={82}
               className="h-14 w-auto opacity-90 sm:h-16"
+              priority
             />
           </div>
 
@@ -152,6 +153,7 @@ export default function DashboardLoginPage() {
             width={120}
             height={120}
             className="opacity-95"
+            priority
           />
         </div>
       </div>

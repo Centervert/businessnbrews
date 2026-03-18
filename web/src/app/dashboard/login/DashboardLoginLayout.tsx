@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -8,12 +9,14 @@ function NavContent({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
     <>
       <div className="flex h-14 items-center border-b border-black/10 px-4">
-        <Link
-          href="/dashboard"
-          className="font-semibold tracking-wide text-[color:var(--color-carolina)]"
-          onClick={onLinkClick}
-        >
-          B&B Admin
+        <Link href="/dashboard" onClick={onLinkClick} className="block">
+          <Image
+            src="/bnb-logo-horz-black.png"
+            alt="Business & Brews"
+            width={140}
+            height={36}
+            className="h-8 w-auto"
+          />
         </Link>
       </div>
       <nav className="flex flex-col gap-0.5 p-3">
@@ -65,7 +68,7 @@ export default function DashboardLoginLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-[color:var(--color-bayside)] text-[color:var(--color-black)]">
+    <div className="flex min-h-screen bg-[color:var(--color-bayside)] font-sans text-[color:var(--color-black)]">
       {/* Mobile: menu button + overlay */}
       <div className="fixed left-0 top-0 z-40 flex h-14 w-full items-center border-b border-black/10 bg-white px-4 md:hidden">
         <button
@@ -80,7 +83,13 @@ export default function DashboardLoginLayout({
             <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         </button>
-        <span className="ml-2 font-semibold text-[color:var(--color-carolina)]">B&B Admin</span>
+        <Image
+          src="/bnb-logo-horz-black.png"
+          alt="Business & Brews"
+          width={120}
+          height={31}
+          className="ml-2 h-7 w-auto"
+        />
       </div>
 
       {/* Mobile drawer overlay */}
@@ -94,7 +103,7 @@ export default function DashboardLoginLayout({
           />
           <aside className="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-black/10 bg-white shadow-xl md:hidden">
             <div className="flex h-14 items-center justify-between border-b border-black/10 px-4">
-              <span className="font-semibold text-[color:var(--color-carolina)]">Menu</span>
+              <span className="text-sm font-medium text-black/80">Menu</span>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}

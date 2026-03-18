@@ -155,13 +155,19 @@ export default function Home() {
               Monthly networking events connecting professionals, entrepreneurs,
               and local leaders across Greenville and Charleston.
             </p>
+            <Link
+              href="/dashboard/login"
+              className="text-xs text-white/40 transition hover:text-white/60"
+            >
+              Log in
+            </Link>
           </div>
 
           <FooterNewsletter />
         </div>
 
         <div className="border-t border-white/10">
-          <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-2 px-6 py-4 md:flex-row md:gap-6">
+          <div className="mx-auto flex w-full max-w-6xl justify-center px-6 py-4">
             <Image
               src="/centervert-builtby.png"
               alt="Built by Centervert"
@@ -169,12 +175,6 @@ export default function Home() {
               height={36}
               className="h-5 w-auto opacity-80"
             />
-            <Link
-              href="/dashboard/login"
-              className="text-xs text-white/40 transition hover:text-white/60"
-            >
-              Log in
-            </Link>
           </div>
         </div>
       </footer>
