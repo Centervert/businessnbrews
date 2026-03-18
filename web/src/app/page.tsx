@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import HeroScroll from "@/components/HeroScroll";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
           </div>
           <nav className="hidden gap-6 text-sm uppercase tracking-[0.2em] md:flex">
             <a href="#next-event">Events</a>
+            <Link href="/signup">Sign up</Link>
           </nav>
           <a
             href="https://www.eventbrite.com/o/109127867981"
@@ -238,24 +240,17 @@ export default function Home() {
 
           <div className="flex w-full max-w-2xl flex-col gap-3">
             <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-              Newsletter
+              News &amp; event notifications
             </p>
             <p className="text-sm text-white/70">
               Get first access to upcoming events and speaker announcements.
             </p>
-            <form className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="w-full min-w-[260px] flex-1 rounded-full border border-white/20 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-coastal)]"
-              />
-              <button
-                type="submit"
-                className="whitespace-nowrap rounded-full bg-[color:var(--color-midland)] px-6 py-3 text-sm font-semibold text-black"
-              >
-                Sign Up
-              </button>
-            </form>
+            <Link
+              href="/signup"
+              className="inline-flex w-fit rounded-full bg-[color:var(--color-midland)] px-6 py-3 text-sm font-semibold text-black"
+            >
+              Sign up
+            </Link>
           </div>
         </div>
 
