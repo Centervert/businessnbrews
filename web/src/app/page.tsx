@@ -54,7 +54,7 @@ export default function Home() {
             ].map((logo) => (
               <div
                 key={logo.src}
-                className="flex h-14 flex-1 items-center justify-center"
+                className="flex min-w-0 flex-1 basis-0 items-center justify-center"
               >
                 <Image
                   src={logo.src}
@@ -62,7 +62,7 @@ export default function Home() {
                   width={220}
                   height={60}
                   sizes="(max-width: 768px) 80px, 220px"
-                  className="h-10 w-auto opacity-90 transition-opacity hover:opacity-100"
+                  className="h-10 w-auto max-w-full object-contain opacity-90 transition-opacity hover:opacity-100"
                 />
               </div>
             ))}
@@ -92,15 +92,15 @@ export default function Home() {
               ].map((logo) => (
                 <div
                   key={logo.src}
-                  className="flex h-14 flex-1 items-center justify-center"
+                  className="flex min-w-0 flex-1 basis-0 items-center justify-center"
                 >
-<Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={200}
-                  height={60}
-                  sizes="(max-width: 768px) 80px, 200px"
-                  className={`h-10 w-auto opacity-90 transition-opacity hover:opacity-100 ${
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={200}
+                    height={60}
+                    sizes="(max-width: 768px) 80px, 200px"
+                    className={`h-10 w-auto max-w-full object-contain opacity-90 transition-opacity hover:opacity-100 ${
                       logo.invert ? "brightness-0 invert" : ""
                     }`}
                   />
@@ -126,7 +126,7 @@ export default function Home() {
                   alt="Realty ONE Group Freedom"
                   width={220}
                   height={56}
-                  className="h-10 w-auto object-contain object-left md:h-12"
+                  className="h-10 w-auto max-w-[200px] object-contain object-left md:h-12 md:max-w-[220px]"
                 />
               </div>
               <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.08em] md:text-4xl">
