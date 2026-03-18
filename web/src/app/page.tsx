@@ -18,9 +18,14 @@ export default function Home() {
           <nav className="hidden gap-6 text-sm uppercase tracking-[0.2em] md:flex">
             <a href="#next-event">Events</a>
           </nav>
-          <button className="rounded-full bg-[color:var(--color-midland)] px-5 py-2 text-sm font-semibold text-black">
+          <a
+            href="https://www.eventbrite.com/o/109127867981"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-[color:var(--color-midland)] px-5 py-2 text-sm font-semibold text-black"
+          >
             Get Tickets
-          </button>
+          </a>
         </div>
       </header>
 
@@ -128,6 +133,9 @@ export default function Home() {
               <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--color-carolina)]">
                 Join the next event
               </p>
+              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-black/50">
+                Powered by RealtyOneGroup Freedom
+              </p>
               <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.08em] md:text-4xl">
                 Business &amp; Brews
               </h2>
@@ -142,31 +150,47 @@ export default function Home() {
                   <p className="text-xs uppercase tracking-[0.25em] text-black/50">
                     When
                   </p>
-                  <p className="mt-2 text-base">Tuesday, March 3 · 5:00 PM – 7:30 PM</p>
+                  <p className="mt-2 text-base">Tuesday, April 14 · 5:00 PM – 7:30 PM</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.25em] text-black/50">
                     Where
                   </p>
-                  <p className="mt-2 text-base">City Club of Greenville · Greenville, SC</p>
+                  <p className="mt-2 text-base">Six &amp; Twenty Distillery · Greenville, SC</p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-black/50">
+                    Guest speaker
+                  </p>
+                  <p className="mt-2 text-base font-semibold">Heath Dillard</p>
+                  <p className="text-sm text-black/70">CEO &amp; President of Visit Greenville</p>
                 </div>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="https://www.eventbrite.com/e/business-brews-tickets-1982852976630"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-[color:var(--color-midland)] px-6 py-3 text-sm font-semibold text-black"
+                <span
+                  className="inline-flex rounded-full bg-[color:var(--color-midland)]/80 px-6 py-3 text-sm font-semibold text-black/90"
+                  aria-label="RSVP coming soon"
                 >
-                  RSVP on Eventbrite
-                </a>
+                  RSVP on Eventbrite — Coming Soon
+                </span>
                 <button className="rounded-full border border-black/20 px-6 py-3 text-sm font-semibold text-black">
                   Add to Calendar
                 </button>
               </div>
             </div>
 
+            <div className="mt-10">
+              <p className="text-xs uppercase tracking-[0.3em] text-black/60">
+                Past events
+              </p>
+              <ul className="mt-4 flex flex-col gap-3">
+                <li className="rounded-2xl border border-black/10 bg-white/80 px-6 py-4 shadow-sm">
+                  <p className="font-semibold text-black">Tuesday, March 3 · City Club of Greenville</p>
+                  <p className="mt-1 text-sm text-black/70">5:00 PM – 7:30 PM · Greenville, SC</p>
+                </li>
+              </ul>
+            </div>
           </section>
 
           <section className="mx-auto w-full max-w-6xl px-6 pb-12">
