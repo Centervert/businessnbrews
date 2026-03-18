@@ -30,7 +30,7 @@ Create a `.env.local` file using `env.example` as a reference.
 
 **Supabase (required for events and auth):**
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — for browser auth (dashboard login)
+- `NEXT_PUBLIC_SUPABASE_ANON` — for browser auth (dashboard login)
 - `SUPABASE_SERVICE_ROLE_KEY` — for server-side admin and public events API
 
 **Email (Resend):**
@@ -91,6 +91,8 @@ web/
 - [x] Brand colors (Carolina, Midland, Coastal, Bayside)
 
 **Coordinator accounts:** Create users in the [Supabase Dashboard](https://supabase.com/dashboard) → Authentication → Users (email/password). Only authenticated users can access `/dashboard` and `/api/admin/*`.
+
+If you get **"Invalid login credentials"** after creating a user: Supabase often requires new users to confirm their email before they can sign in. Either (1) in the Dashboard, open the user and use **Confirm email** (or recreate the user with **Auto Confirm User** checked), or (2) in Authentication → Providers → Email, turn off **Confirm email** so sign-in works without confirmation. Adding `http://localhost:3000` to Authentication → URL Configuration → **Redirect URLs** is also recommended for local dev.
 
 ## Next Steps
 

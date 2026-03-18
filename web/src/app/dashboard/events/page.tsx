@@ -77,22 +77,22 @@ export default function DashboardEventsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-black">Events</h1>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-xl font-semibold text-black sm:text-2xl">Events</h1>
         <Link
           href="/dashboard/events/new"
-          className="rounded-lg bg-[color:var(--color-carolina)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+          className="w-fit rounded-lg bg-[color:var(--color-carolina)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
         >
           Add event
         </Link>
       </div>
-      <div className="mt-6 overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm">
+      <div className="mt-4 overflow-x-auto rounded-xl border border-black/10 bg-white shadow-sm sm:mt-6">
         {events.length === 0 ? (
           <div className="p-8 text-center text-black/60">
             No events yet. Add one to get started.
           </div>
         ) : (
-          <table className="w-full text-left text-sm">
+          <table className="w-full min-w-[600px] text-left text-sm">
             <thead>
               <tr className="border-b border-black/10 bg-black/5">
                 <th className="px-4 py-3 font-medium">Title</th>

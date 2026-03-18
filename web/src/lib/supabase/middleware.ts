@@ -6,10 +6,14 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON;
+  if (!url || !anonKey) {
+    return response;
+  }
+
+  try {
+    const supabase = createServerClient(url, anonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll();
@@ -20,31 +24,33 @@ export async function updateSession(request: NextRequest) {
           );
         },
       },
+    });
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const isDashboard = request.nextUrl.pathname.startsWith("/dashboard");
+    const isDashboardLogin = request.nextUrl.pathname === "/dashboard/login";
+    const isAdminApi = request.nextUrl.pathname.startsWith("/api/admin");
+
+    if (isDashboard && !isDashboardLogin && !user) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/dashboard/login";
+      return NextResponse.redirect(redirectUrl);
     }
-  );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    if (isDashboardLogin && user) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/dashboard/events";
+      return NextResponse.redirect(redirectUrl);
+    }
 
-  const isDashboard = request.nextUrl.pathname.startsWith("/dashboard");
-  const isDashboardLogin = request.nextUrl.pathname === "/dashboard/login";
-  const isAdminApi = request.nextUrl.pathname.startsWith("/api/admin");
-
-  if (isDashboard && !isDashboardLogin && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard/login";
-    return NextResponse.redirect(url);
-  }
-
-  if (isDashboardLogin && user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard/events";
-    return NextResponse.redirect(url);
-  }
-
-  if (isAdminApi && !user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (isAdminApi && !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  } catch {
+    return response;
   }
 
   return response;

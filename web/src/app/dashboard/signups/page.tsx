@@ -47,17 +47,17 @@ export default function DashboardSignupsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-black">Signups</h1>
+      <h1 className="text-xl font-semibold text-black sm:text-2xl">Signups</h1>
       <p className="mt-1 text-sm text-black/60">
         Newsletter and event notification signups from the website.
       </p>
-      <div className="mt-6 overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm">
+      <div className="mt-4 overflow-x-auto rounded-xl border border-black/10 bg-white shadow-sm sm:mt-6">
         {contacts.length === 0 ? (
           <div className="p-8 text-center text-black/60">
             No signups yet.
           </div>
         ) : (
-          <table className="w-full text-left text-sm">
+          <table className="w-full min-w-[520px] text-left text-sm">
             <thead>
               <tr className="border-b border-black/10 bg-black/5">
                 <th className="px-4 py-3 font-medium">Name</th>
