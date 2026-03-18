@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Greenville's premier networking series with speakers, venues, and events.",
   icons: {
-    icon: "/bnb-favicon.png",
+    icon: "/bnb.badge.white.png",
   },
 };
 

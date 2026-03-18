@@ -28,6 +28,11 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Create a `.env.local` file using `env.example` as a reference.
 
+**Supabase (required for events and auth):**
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — for browser auth (dashboard login)
+- `SUPABASE_SERVICE_ROLE_KEY` — for server-side admin and public events API
+
 **Email (Resend):**
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
@@ -39,7 +44,7 @@ Create a `.env.local` file using `env.example` as a reference.
 
 **Optional:**
 - `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`
-- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_SITE_URL` — used for post-logout redirect
 
 ## Project Structure
 
@@ -77,12 +82,15 @@ web/
 - [x] About section
 - [x] Sponsors logo strip
 - [x] Past venues logo strip
-- [x] Next event RSVP card
-- [x] Recent events list
+- [x] Next event RSVP card (from Supabase; times in Eastern)
+- [x] Past events list (auto-moves after event day passes)
 - [x] Feathered photo strip
 - [x] Footer with newsletter signup
+- [x] **Coordinator dashboard** — `/dashboard` (Events, Signups); login at `/dashboard/login` or via discreet “Log in” in footer
 - [x] Brand fonts (Boska + Satoshi)
 - [x] Brand colors (Carolina, Midland, Coastal, Bayside)
+
+**Coordinator accounts:** Create users in the [Supabase Dashboard](https://supabase.com/dashboard) → Authentication → Users (email/password). Only authenticated users can access `/dashboard` and `/api/admin/*`.
 
 ## Next Steps
 

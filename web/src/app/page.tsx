@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/Header";
 import FooterNewsletter from "@/components/FooterNewsletter";
 import HeroScroll from "@/components/HeroScroll";
+import { EventsSection } from "@/components/EventsSection";
 
 export default function Home() {
   return (
@@ -109,82 +111,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section
-            id="next-event"
-            className="mx-auto w-full max-w-6xl px-6 pt-12"
-          >
-            <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
-              <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--color-carolina)]">
-                Join the next event
-              </p>
-              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-black/50">
-                Powered by
-              </p>
-              <div className="mt-2 flex items-center gap-2">
-                <Image
-                  src="/realty-one-group-freedom.png"
-                  alt="Realty ONE Group Freedom"
-                  width={220}
-                  height={56}
-                  className="h-10 w-auto max-w-[200px] object-contain object-left md:h-12 md:max-w-[220px]"
-                />
-              </div>
-              <h2 className="mt-4 text-3xl font-black uppercase tracking-[0.08em] md:text-4xl">
-                Business &amp; Brews
-              </h2>
-              <p className="mt-4 text-base text-black/70">
-                Join us for Business &amp; Brews, where you can network with
-                fellow professionals over a cold one and discuss all things
-                business! Free to attend and open to the public.
-              </p>
-
-              <div className="mt-6 grid gap-4 text-sm text-black/80 md:grid-cols-2">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.25em] text-black/50">
-                    When
-                  </p>
-                  <p className="mt-2 text-base">Tuesday, April 14 · 5:00 PM – 7:30 PM</p>
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-[0.25em] text-black/50">
-                    Where
-                  </p>
-                  <p className="mt-2 text-base">Six &amp; Twenty Distillery · Greenville, SC</p>
-                </div>
-                <div className="md:col-span-2">
-                  <p className="text-xs uppercase tracking-[0.25em] text-black/50">
-                    Guest speaker
-                  </p>
-                  <p className="mt-2 text-base font-semibold">Heath Dillard</p>
-                  <p className="text-sm text-black/70">CEO &amp; President of Visit Greenville</p>
-                </div>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <span
-                  className="inline-flex rounded-full bg-[color:var(--color-midland)]/80 px-6 py-3 text-sm font-semibold text-black/90"
-                  aria-label="RSVP coming soon"
-                >
-                  RSVP on Eventbrite — Coming Soon
-                </span>
-                <button className="rounded-full border border-black/20 px-6 py-3 text-sm font-semibold text-black">
-                  Add to Calendar
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <p className="text-xs uppercase tracking-[0.3em] text-black/60">
-                Past events
-              </p>
-              <ul className="mt-4 flex flex-col gap-3">
-                <li className="rounded-2xl border border-black/10 bg-white/80 px-6 py-4 shadow-sm">
-                  <p className="font-semibold text-black">Tuesday, March 3 · City Club of Greenville</p>
-                  <p className="mt-1 text-sm text-black/70">5:00 PM – 7:30 PM · Greenville, SC</p>
-                </li>
-              </ul>
-            </div>
-          </section>
+          <EventsSection />
 
           <section className="mx-auto w-full max-w-6xl px-6 pb-12">
             <div className="relative overflow-hidden rounded-3xl bg-white/60">
@@ -234,7 +161,7 @@ export default function Home() {
         </div>
 
         <div className="border-t border-white/10">
-          <div className="mx-auto flex w-full max-w-6xl items-center justify-center px-6 py-4">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-2 px-6 py-4 md:flex-row md:gap-6">
             <Image
               src="/centervert-builtby.png"
               alt="Built by Centervert"
@@ -242,6 +169,12 @@ export default function Home() {
               height={36}
               className="h-5 w-auto opacity-80"
             />
+            <Link
+              href="/dashboard/login"
+              className="text-xs text-white/40 transition hover:text-white/60"
+            >
+              Log in
+            </Link>
           </div>
         </div>
       </footer>
