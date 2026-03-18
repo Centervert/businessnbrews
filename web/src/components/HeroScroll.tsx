@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 
 const TOTAL_FRAMES = 240;
 const FRAME_PATH = "/hero-video/ezgif-frame-";
-const INITIAL_LOAD = 10; // frames to load immediately on mount
-const LOOKAHEAD = 20; // frames to preload ahead of scroll
-const LOOKBEHIND = 8; // frames to preload behind scroll
+const INITIAL_LOAD = 50; // preload more frames so scroll doesn't trigger pop-in
+const LOOKAHEAD = 15;
+const LOOKBEHIND = 5;
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max);
@@ -64,7 +64,8 @@ export default function HeroScroll() {
         imagesRef.current[frameIndex] = image;
         loadedRef.current.add(frameIndex);
         loadingRef.current.delete(frameIndex);
-        renderRef.current();
+        // Batch redraw on next frame to avoid multiple paints when many frames load
+        requestAnimationFrame(renderRef.current);
       };
     };
 
@@ -132,12 +133,11 @@ export default function HeroScroll() {
       context.drawImage(img, x, y, drawWidth, drawHeight);
 
       if (textRef.current) {
-        const shade = Math.round(255 * eased);
         const scaleText = 0.98 + eased * 0.04;
         const opacity = 0.1 + eased * 0.9;
-        textRef.current.style.color = `rgb(${shade}, ${shade}, ${shade})`;
         textRef.current.style.transform = `scale(${scaleText})`;
         textRef.current.style.opacity = `${opacity}`;
+        textRef.current.style.color = `rgb(${Math.round(255 * eased)},${Math.round(255 * eased)},${Math.round(255 * eased)})`;
       }
     };
 
@@ -152,16 +152,21 @@ export default function HeroScroll() {
     render();
 
     let rafId = 0;
+    let scrollScheduled = false;
     const onScroll = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(render);
+      if (scrollScheduled) return;
+      scrollScheduled = true;
+      rafId = requestAnimationFrame(() => {
+        scrollScheduled = false;
+        render();
+      });
     };
     const onResize = () => {
       resizeCanvas();
       render();
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -172,15 +177,15 @@ export default function HeroScroll() {
 
   return (
     <section ref={sectionRef} className="relative mt-16 h-[260vh] md:mt-20">
-      <div className="sticky top-16 h-[calc(100vh-4rem)] md:top-20 md:h-[calc(100vh-5rem)]">
+      <div className="sticky top-16 h-[calc(100vh-4rem)] md:top-20 md:h-[calc(100vh-5rem)] will-change-transform">
         <div className="relative h-full w-full overflow-hidden">
-          <canvas ref={canvasRef} className="block h-full w-full" />
+          <canvas ref={canvasRef} className="block h-full w-full will-change-transform" />
           <div className="pointer-events-none absolute inset-0 bg-black/35" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
           <div className="absolute inset-0 flex items-center justify-center px-6 md:px-10">
             <h1
               ref={textRef}
-              className="text-center text-3xl font-black uppercase tracking-[0.08em] leading-tight transition-transform duration-200 ease-out md:text-6xl"
+              className="text-center text-3xl font-black uppercase tracking-[0.08em] leading-tight will-change-transform [transition:none] md:text-6xl"
             >
               South Carolina&apos;s best networking group.
             </h1>

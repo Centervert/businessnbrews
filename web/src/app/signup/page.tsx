@@ -1,13 +1,22 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Header from "@/components/Header";
+
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+  if (digits.length === 0) return "";
+  if (digits.length <= 3) return `(${digits}${digits.length === 3 ? ") " : ""}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
 
 export default function SignupPage() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [phone, setPhone] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,7 +26,7 @@ export default function SignupPage() {
     const data = {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim() || null,
       business: (form.elements.namedItem("business") as HTMLInputElement).value,
     };
     try {
@@ -41,41 +50,7 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/60 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:h-20">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/bnb.logo.2.white.png"
-              alt="Business & Brews logo"
-              width={220}
-              height={58}
-              priority
-            />
-          </Link>
-          <div className="flex gap-6 text-sm uppercase tracking-[0.2em]">
-            <Link
-              href="/#next-event"
-              className="text-white/90 hover:text-white"
-            >
-              Events
-            </Link>
-            <Link
-              href="/signup"
-              className="text-white/90 hover:text-white"
-            >
-              Sign up
-            </Link>
-          </div>
-          <a
-            href="https://www.eventbrite.com/o/109127867981"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-[color:var(--color-midland)] px-5 py-2 text-sm font-semibold text-black"
-          >
-            Get Tickets
-          </a>
-        </div>
-      </header>
+      <Header />
 
       <main className="pt-28 pb-20">
         <div className="mx-auto w-full max-w-md px-6">
@@ -137,8 +112,10 @@ export default function SignupPage() {
                   id="phone"
                   name="phone"
                   type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(formatPhone(e.target.value))}
                   className="mt-2 w-full rounded-full border border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-coastal)]"
-                  placeholder="(555) 000-0000"
+                  placeholder="(864) 555-1234"
                 />
               </div>
               <div>

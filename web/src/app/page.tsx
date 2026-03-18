@@ -1,40 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
+import Header from "@/components/Header";
+import FooterNewsletter from "@/components/FooterNewsletter";
 import HeroScroll from "@/components/HeroScroll";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/60 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:h-20">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/bnb.logo.2.white.png"
-              alt="Business & Brews logo"
-              width={220}
-              height={58}
-              priority
-            />
-          </div>
-          <nav className="hidden gap-6 text-sm uppercase tracking-[0.2em] md:flex">
-            <a href="#next-event">Events</a>
-            <Link href="/signup">Sign up</Link>
-          </nav>
-          <a
-            href="https://www.eventbrite.com/o/109127867981"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-[color:var(--color-midland)] px-5 py-2 text-sm font-semibold text-black"
-          >
-            Get Tickets
-          </a>
-        </div>
-      </header>
+      <Header />
 
       <main className="flex flex-col gap-20 pb-0">
         <HeroScroll />
 
-        <div className="bg-[color:var(--color-bayside)] pb-12 text-black">
+        <div
+          className="bg-[color:var(--color-bayside)] pb-12 text-black"
+          style={{ contentVisibility: "auto", contain: "layout" }}
+        >
           <section className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-6 pt-16 text-center">
             <p className="text-xs uppercase tracking-[0.3em] text-[color:var(--color-carolina)]">
               About Business & Brews
@@ -81,6 +61,7 @@ export default function Home() {
                   alt={logo.alt}
                   width={220}
                   height={60}
+                  sizes="(max-width: 768px) 80px, 220px"
                   className="h-10 w-auto opacity-90 transition-opacity hover:opacity-100"
                 />
               </div>
@@ -113,12 +94,13 @@ export default function Home() {
                   key={logo.src}
                   className="flex h-14 flex-1 items-center justify-center"
                 >
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={200}
-                    height={60}
-                    className={`h-10 w-auto opacity-90 transition-opacity hover:opacity-100 ${
+<Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={200}
+                  height={60}
+                  sizes="(max-width: 768px) 80px, 200px"
+                  className={`h-10 w-auto opacity-90 transition-opacity hover:opacity-100 ${
                       logo.invert ? "brightness-0 invert" : ""
                     }`}
                   />
@@ -205,13 +187,14 @@ export default function Home() {
                   "/gallery/2024-11-13.jpg",
                 ].map((src) => (
                   <div key={src} className="h-24 w-1/4 flex-shrink-0 md:h-32">
-                    <Image
-                      src={src}
-                      alt="Business & Brews event highlight"
-                      width={600}
-                      height={320}
-                      className="h-full w-full object-cover"
-                    />
+<Image
+                  src={src}
+                  alt="Business & Brews event highlight"
+                  width={600}
+                  height={320}
+                  sizes="(max-width: 768px) 25vw, 150px"
+                  className="h-full w-full object-cover"
+                />
                   </div>
                 ))}
               </div>
@@ -238,20 +221,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex w-full max-w-2xl flex-col gap-3">
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-              News &amp; event notifications
-            </p>
-            <p className="text-sm text-white/70">
-              Get first access to upcoming events and speaker announcements.
-            </p>
-            <Link
-              href="/signup"
-              className="inline-flex w-fit rounded-full bg-[color:var(--color-midland)] px-6 py-3 text-sm font-semibold text-black"
-            >
-              Sign up
-            </Link>
-          </div>
+          <FooterNewsletter />
         </div>
 
         <div className="border-t border-white/10">
