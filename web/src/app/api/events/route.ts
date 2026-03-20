@@ -1,7 +1,8 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NextResponse } from "next/server";
 
-/** Public: list upcoming and past events. Event times are stored in UTC, display in Eastern (America/New_York). */
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const supabase = createAdminClient();
