@@ -12,7 +12,7 @@ export async function GET() {
       .order("starts_at", { ascending: false });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json({ error: error.message }, { status: 500, headers: { "Cache-Control": "no-store" } });
     }
 
     const now = new Date();
@@ -35,10 +35,10 @@ export async function GET() {
       nextEvent: upcoming[0] ?? null,
       pastEvents: past,
       upcomingEvents: upcoming,
-    });
+    }, { headers: { "Cache-Control": "no-store" } });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Server error";
     const status = message.includes("Missing Supabase") ? 503 : 500;
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ error: message }, { status, headers: { "Cache-Control": "no-store" } });
   }
 }

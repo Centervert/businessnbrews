@@ -4,12 +4,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-/** Build ISO string for Eastern (EST = -05:00). User said times are Eastern Standard Time. */
+const EASTERN = "America/New_York";
+
 function toEasternISO(dateStr: string, timeStr: string): string {
   const [year, month, day] = dateStr.split("-").map(Number);
   const [hour, minute] = timeStr.split(":").map(Number);
-  const d = new Date(Date.UTC(year, month - 1, day, hour + 5, minute));
-  return d.toISOString();
+  const ref = new Date(Date.UTC(year, month - 1, day, 12, 0));
+  const utcRepr = new Date(ref.toLocaleString("en-US", { timeZone: "UTC" }));
+  const etRepr = new Date(ref.toLocaleString("en-US", { timeZone: EASTERN }));
+  const offsetH = (utcRepr.getTime() - etRepr.getTime()) / 3_600_000;
+  return new Date(Date.UTC(year, month - 1, day, hour + offsetH, minute)).toISOString();
 }
 
 export default function NewEventPage() {
@@ -77,7 +81,7 @@ export default function NewEventPage() {
         <h1 className="text-2xl font-semibold text-black">Add event</h1>
       </div>
       <p className="mb-4 text-xs text-black/60">
-        Times are in Eastern (EST).
+        Times are in Eastern (ET).
       </p>
       <form onSubmit={handleSubmit} className="max-w-xl space-y-4">
         <div>

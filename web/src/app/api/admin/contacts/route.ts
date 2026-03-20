@@ -11,11 +11,11 @@ export async function GET() {
       .select("id, name, email, phone, business, created_at")
       .order("created_at", { ascending: false });
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json(data ?? []);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500, headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json(data ?? [], { headers: { "Cache-Control": "no-store" } });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Server error";
     const status = message.includes("Missing Supabase") ? 503 : 500;
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ error: message }, { status, headers: { "Cache-Control": "no-store" } });
   }
 }

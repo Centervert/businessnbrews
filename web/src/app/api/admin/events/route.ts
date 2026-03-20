@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+const NO_STORE = { "Cache-Control": "no-store" };
+
 export async function GET() {
   try {
     const supabase = createAdminClient();
@@ -12,12 +14,12 @@ export async function GET() {
       .select("*")
       .order("starts_at", { ascending: false });
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json(data);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE });
+    return NextResponse.json(data, { headers: NO_STORE });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Server error";
     const status = message.includes("Missing Supabase") ? 503 : 500;
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json({ error: message }, { status, headers: NO_STORE });
   }
 }
 
@@ -40,7 +42,7 @@ export async function POST(request: Request) {
     if (!title || !venue_name || !venue_location) {
       return NextResponse.json(
         { error: "title, venue_name, and venue_location are required" },
-        { status: 400 }
+        { status: 400, headers: NO_STORE }
       );
     }
 
@@ -49,7 +51,7 @@ export async function POST(request: Request) {
     if (!startsAt || !endsAt || Number.isNaN(startsAt.getTime()) || Number.isNaN(endsAt.getTime())) {
       return NextResponse.json(
         { error: "Valid starts_at and ends_at (ISO 8601) are required" },
-        { status: 400 }
+        { status: 400, headers: NO_STORE }
       );
     }
 
@@ -71,13 +73,13 @@ export async function POST(request: Request) {
       .select()
       .single();
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE });
     revalidatePath("/");
-    return NextResponse.json(data);
+    return NextResponse.json(data, { headers: NO_STORE });
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : "Server error" },
-      { status: 500 }
+      { status: 500, headers: NO_STORE }
     );
   }
 }
