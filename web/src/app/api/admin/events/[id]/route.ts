@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/admin";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function PATCH(
@@ -51,6 +52,7 @@ export async function PATCH(
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     if (!data) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    revalidatePath("/");
     return NextResponse.json(data);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Server error";
@@ -69,6 +71,7 @@ export async function DELETE(
     const { error } = await supabase.from("events").delete().eq("id", id);
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    revalidatePath("/");
     return NextResponse.json({ success: true });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Server error";

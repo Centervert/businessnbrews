@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/admin";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -69,6 +70,7 @@ export async function POST(request: Request) {
       .single();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    revalidatePath("/");
     return NextResponse.json(data);
   } catch (err) {
     return NextResponse.json(
